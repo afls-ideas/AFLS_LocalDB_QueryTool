@@ -1,1 +1,3 @@
 *.ttf
+.venv/
+*.mov

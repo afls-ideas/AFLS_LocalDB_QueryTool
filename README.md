@@ -2,6 +2,10 @@
 
 A diagnostic Intelligent Content (IC) presentation for the Life Sciences Cloud (LSC) iPad app. It helps consultants inspect the local SQLite database on the device to troubleshoot configuration issues.
 
+## Demo
+
+<video src="assets/QueryToolScreens.mp4" controls width="640"></video>
+
 ## Features
 
 ### Object Browser (default tab)
