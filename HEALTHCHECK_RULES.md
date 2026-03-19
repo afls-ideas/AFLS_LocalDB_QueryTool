@@ -227,22 +227,9 @@ Then update this document with the new rule details.
 - No subqueries in SELECT statements (fetchWithParams limitation)
 - Some objects (KamAccountPlan, SampleTransaction, SampleTransactionItem) require specific features/licenses to be enabled
 
-## API Name Corrections
-
-The following corrections were made based on `describe_sobject` verification:
-
-| Wrong Name | Correct API Name |
-|------------|-----------------|
-| ProviderVisit | Visit |
-| ProviderAffiliation | HealthcarePractitionerFacility |
-| IsPrimaryAffiliation | IsPrimary |
-| MarketableProduct | LifeSciMarketableProduct |
-| TerritoryProductQtyAllocation | TerritoryProdtQtyAllocation |
-
 ## Changelog
 
 - **2026-03-18** - v5: Renamed to AFLS Mobile DB. Folder renamed to 01_Healthcheck. Object Browser is now the default tab. Created README.md. Cleaned up stale files.
 - **2026-03-18** - v4: Added comprehensive default fields for all 45 objects (verified via describe_sobject). Fixed API names: MarketableProduct -> LifeSciMarketableProduct, TerritoryProductQtyAllocation -> TerritoryProdtQtyAllocation. Brightened text colors for readability.
 - **2026-03-18** - v3: Fixed object/field API names across all objects. Removed wrong names (ProviderVisit->Visit, ProviderAffiliation->HealthcarePractitionerFacility, IsPrimaryAffiliation->IsPrimary, SpecialtyCode->removed, etc). Added checkbox field selection to Object Browser. Conservative field lists - use browser to discover additional fields.
 - **2026-03-18** - v2: Rewrote to use `PresentationPlayer.fetchWithParams()`. Removed jQuery and swipe.js. Renamed to 01_Healthcheck.html. Pure vanilla JS. Uses `PresentationDOMContentLoaded` event.
-- **2026-03-18** - v1: Initial version with CLMPlayer bridge
