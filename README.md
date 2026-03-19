@@ -4,7 +4,7 @@ A diagnostic Intelligent Content (IC) presentation for the Life Sciences Cloud (
 
 ## Demo
 
-<video src="assets/QueryToolScreens.mp4" controls width="640"></video>
+https://raw.githubusercontent.com/afls-ideas/AFLS_LocalDB_QueryTool/main/assets/QueryToolScreens.mp4
 
 ## Features
 
