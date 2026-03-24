@@ -11,7 +11,7 @@ An Intelligent Content (IC) presentation for the LSC iPad app that provides thre
 ## File Structure
 
 ```
-01_Healthcheck/
+01_QueryTool/
   01_Healthcheck.html   - Main presentation (single-page app with tabs)
   js/
     bridge.js           - PresentationPlayer.fetchWithParams() bridge abstraction
@@ -208,7 +208,7 @@ Then update this document with the new rule details.
 
 ## Deployment
 
-1. Zip the `01_Healthcheck` folder: `cd IC_Healthcheck && zip -r 01_Healthcheck.zip 01_Healthcheck/`
+1. Zip the `01_QueryTool` folder: `cd IC_Healthcheck && zip -r 01_QueryTool.zip 01_QueryTool/`
 2. Upload the ZIP as an IC presentation in Salesforce (Presentation record)
 3. Distribute to territory or assign globally
 4. Open from the IC content player on the iPad
@@ -229,7 +229,7 @@ Then update this document with the new rule details.
 
 ## Changelog
 
-- **2026-03-18** - v5: Renamed to AFLS Mobile DB. Folder renamed to 01_Healthcheck. Object Browser is now the default tab. Created README.md. Cleaned up stale files.
+- **2026-03-18** - v5: Renamed to AFLS Mobile DB. Folder renamed to 01_QueryTool. Object Browser is now the default tab. Created README.md. Cleaned up stale files.
 - **2026-03-18** - v4: Added comprehensive default fields for all 45 objects (verified via describe_sobject). Fixed API names: MarketableProduct -> LifeSciMarketableProduct, TerritoryProductQtyAllocation -> TerritoryProdtQtyAllocation. Brightened text colors for readability.
 - **2026-03-18** - v3: Fixed object/field API names across all objects. Removed wrong names (ProviderVisit->Visit, ProviderAffiliation->HealthcarePractitionerFacility, IsPrimaryAffiliation->IsPrimary, SpecialtyCode->removed, etc). Added checkbox field selection to Object Browser. Conservative field lists - use browser to discover additional fields.
 - **2026-03-18** - v2: Rewrote to use `PresentationPlayer.fetchWithParams()`. Removed jQuery and swipe.js. Renamed to 01_Healthcheck.html. Pure vanilla JS. Uses `PresentationDOMContentLoaded` event.

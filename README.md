@@ -29,7 +29,7 @@ https://raw.githubusercontent.com/afls-ideas/AFLS_LocalDB_QueryTool/main/assets/
 
 ```bash
 cd IC_Healthcheck
-zip -r 01_Healthcheck.zip 01_Healthcheck/ -x "01_Healthcheck/.DS_Store" "01_Healthcheck/**/.DS_Store"
+zip -r 01_QueryTool.zip 01_QueryTool/ -x "01_QueryTool/.DS_Store" "01_QueryTool/**/.DS_Store"
 ```
 
 ### 2. Upload as an IC Presentation
@@ -40,8 +40,8 @@ zip -r 01_Healthcheck.zip 01_Healthcheck/ -x "01_Healthcheck/.DS_Store" "01_Heal
    - **Name**: AFLS Mobile DB
    - **IsActive**: checked
 4. Save the record
-5. Under the **Presentation Pages** related list, upload `01_Healthcheck.zip` as an attachment or use the file upload mechanism for IC content
-6. The ZIP must contain the folder `01_Healthcheck/` at the root, with `01_Healthcheck.html` inside it
+5. Under the **Presentation Pages** related list, upload `01_QueryTool.zip` as an attachment or use the file upload mechanism for IC content
+6. The ZIP must contain the folder `01_QueryTool/` at the root, with `01_Healthcheck.html` inside it
 
 ### 3. Distribute to Users
 
@@ -62,7 +62,7 @@ When opened in a desktop browser (not on the iPad), mock data is returned so the
 ## File Structure
 
 ```
-01_Healthcheck/
+01_QueryTool/
   01_Healthcheck.html   - Single-page app (HTML + CSS + JS inline)
   js/
     bridge.js           - PresentationPlayer.fetchWithParams() abstraction layer
