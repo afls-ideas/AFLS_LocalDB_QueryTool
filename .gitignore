@@ -2,3 +2,5 @@
 .venv/
 *.mov
 Article/
+*.zip
+!assets/01_QueryTool.zip

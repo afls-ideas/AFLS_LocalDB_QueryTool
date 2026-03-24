@@ -27,10 +27,7 @@ A diagnostic Intelligent Content (IC) presentation for the Life Sciences Cloud (
 
 ### 1. Create the ZIP
 
-```bash
-cd 01_QueryTool
-zip -r 01_QueryTool.zip 01_QueryTool/ -x "01_QueryTool/.DS_Store" "01_QueryTool/**/.DS_Store"
-```
+The ZIP file is pre-created for you at `assets/01_QueryTool.zip`.
 
 ### 2. Upload as an IC Presentation
 
