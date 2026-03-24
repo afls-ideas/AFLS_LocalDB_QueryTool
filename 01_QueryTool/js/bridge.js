@@ -3,6 +3,9 @@
  * Abstraction layer using PresentationPlayer.fetchWithParams()
  * Ref: https://help.salesforce.com/s/articleView?id=ind.lsc_presentation_player_functions.htm
  *
+ * License: MIT (see repository LICENSE file).
+ * Disclaimer: This code is provided "as is" for diagnostic use; use at your own risk.
+ *
  * PresentationPlayer.fetchWithParams(query, params, callbackMethodName)
  *   - query: SOQL string or queryLocator for pagination
  *   - params: { batchSize: N } (max 100, default 15)

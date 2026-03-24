@@ -84,3 +84,13 @@ Edit `js/healthcheck.js` and add a new entry to the `rules` array. See `HEALTHCH
 - Callback names must be global function name strings (not function references)
 - Max 100 records per batch, bridge auto-paginates through all results
 - Initialization via `PresentationDOMContentLoaded` event on device
+
+## License
+
+This project is released under the MIT License. See `LICENSE`.
+
+## Disclaimer
+
+This tool is provided for diagnostic and troubleshooting use only. Use it at your own risk.
+You are responsible for validating behavior in your org, following your security/compliance policies,
+and preventing misuse in production workflows.
