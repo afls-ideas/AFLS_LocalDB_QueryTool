@@ -1,0 +1,12 @@
+{
+  "packageDirectories": [
+    {
+      "path": "copay_metadata",
+      "default": true
+    }
+  ],
+  "name": "co-pay",
+  "namespace": "",
+  "sfdcLoginUrl": "https://login.salesforce.com",
+  "sourceApiVersion": "66.0"
+}

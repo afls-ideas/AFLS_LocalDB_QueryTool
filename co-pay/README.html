@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Using the Financial Assistance Data Model in AFLS</title>
+  <style>
+    :root {
+      color-scheme: light dark;
+      --bg: #ffffff;
+      --fg: #1f2328;
+      --muted: #57606a;
+      --card: #f6f8fa;
+      --border: #d0d7de;
+      --code: #0a3069;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #0d1117;
+        --fg: #e6edf3;
+        --muted: #8b949e;
+        --card: #161b22;
+        --border: #30363d;
+        --code: #79c0ff;
+      }
+    }
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--fg);
+      line-height: 1.55;
+    }
+    main {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 32px 20px 56px;
+    }
+    h1, h2 { line-height: 1.25; }
+    h1 { margin-top: 0; font-size: 2rem; }
+    h2 { margin-top: 2rem; font-size: 1.3rem; border-bottom: 1px solid var(--border); padding-bottom: 0.35rem; }
+    p, li { font-size: 1rem; }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      color: var(--code);
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.1rem 0.35rem;
+      font-size: 0.92rem;
+    }
+    .diagram {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px;
+      overflow-x: auto;
+    }
+    .screenshot {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin-top: 0.75rem;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Using the Financial Assistance Data Model in AFLS</h1>
+    <p>
+      This project uses Salesforce Financial Assistance objects to support Co-Pay enrollment and
+      claims/disbursement workflows.
+    </p>
+    <p>
+      AFLS is powerful because teams can leverage existing Salesforce platform data models used across
+      LSC and Health Cloud, as long as the required permissions and licenses are provisioned.
+    </p>
+
+    <h2>Mobile Enablement Setup</h2>
+    <p>
+      This repo also documents how to make Financial Assistance objects show up correctly in mobile experiences.
+    </p>
+    <ul>
+      <li>Grant visibility to the objects through the right permission sets and/or PSL-based access.</li>
+      <li>For standard objects, add the standard tab into the target app (for example, <code>Life Sciences Commercial</code>).</li>
+      <li>In profile or permission set tab settings, set the tab to <code>Default On</code>; at minimum, ensure it is not <code>Tab Hidden</code>.</li>
+      <li>Validate in the online app first that end users see the tab by default.</li>
+      <li>Assign page layouts for these objects to the target profile; missing page layout assignment can cause online errors and blank mobile views.</li>
+      <li>Before creating OMCC (Object Metadata Cache Configuration), confirm the profile has <code>Read</code> access to the objects.</li>
+      <li>Create OMCC entries and map them to the intended profiles.</li>
+      <li>Seed representative data so the mobile UI can be validated end-to-end.</li>
+    </ul>
+
+    <h2>Screens</h2>
+    <img class="screenshot" src="assets/FinancialAssistance_Screens.gif" alt="Financial Assistance screens walkthrough">
+
+    <h2>Objects In Scope</h2>
+    <ul>
+      <li><code>ProgramEnrollment</code>: enrollment record for a patient/member in a financial assistance program.</li>
+      <li><code>BenefitAssignment</code>: assignment of a specific benefit to a program enrollment.</li>
+      <li><code>BenefitDisbursement</code>: fulfillment/disbursement events tied to a benefit assignment.</li>
+      <li><code>Program</code>: parent program definition referenced by enrollments.</li>
+      <li><code>Benefit</code>: benefit definition referenced by benefit assignments.</li>
+      <li><code>BenefitType</code>: required reference object used by <code>Benefit</code> records.</li>
+    </ul>
+
+    <h2>Relationship Model</h2>
+    <div class="diagram">
+      <pre class="mermaid">
+erDiagram
+    Program ||--o{ ProgramEnrollment : "ProgramId"
+    ProgramEnrollment ||--o{ BenefitAssignment : "ProgramEnrollmentId"
+    Benefit ||--o{ BenefitAssignment : "BenefitId"
+    BenefitAssignment ||--o{ BenefitDisbursement : "BenefitAssignmentId"
+    ProgramEnrollment ||--o{ BenefitDisbursement : "ProgramEnrollmentId"
+      </pre>
+    </div>
+
+    <h2>Field Notes</h2>
+    <ul>
+      <li><code>ProgramEnrollment</code> requires:
+        <ul>
+          <li><code>Name</code></li>
+          <li><code>ProgramId</code></li>
+          <li><code>IsActive</code> should be <code>true</code> before assignment/disbursement flows.</li>
+        </ul>
+      </li>
+      <li><code>BenefitAssignment</code> requires:
+        <ul>
+          <li><code>BenefitId</code></li>
+          <li><code>ProgramEnrollmentId</code> is used to tie assignment to enrollment.</li>
+        </ul>
+      </li>
+      <li><code>BenefitDisbursement</code> requires:
+        <ul>
+          <li><code>BenefitAssignmentId</code></li>
+          <li><code>ActualCompletionDate</code></li>
+          <li>In this org, <code>OwnerId</code> is not present on this object.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h2>Permission Model</h2>
+    <p>Use permission set <code>ManageFinancialAssistanceProgram</code> to grant object access needed for:</p>
+    <ul>
+      <li><code>ProgramEnrollment</code></li>
+      <li><code>BenefitAssignment</code></li>
+      <li><code>BenefitDisbursement</code></li>
+      <li><code>BenefitType</code> (dependency for <code>Benefit</code>)</li>
+    </ul>
+
+    <h2>Example Seed Data Flow</h2>
+    <ol>
+      <li>Create <code>ProgramEnrollment</code> for a user (for example, an FSR), set <code>IsActive = true</code>.</li>
+      <li>Create <code>BenefitAssignment</code> linked to that enrollment and a <code>Benefit</code>.</li>
+      <li>Create <code>BenefitDisbursement</code> linked to the assignment (and enrollment where applicable).</li>
+    </ol>
+    <p>This gives an end-to-end Co-Pay flow: enrollment -&gt; assigned benefit -&gt; disbursement/claim capture.</p>
+
+    <h2>Add a Tab to "Life Sciences Commercial"</h2>
+    <p>Use Salesforce Setup UI (recommended for managed app nav updates):</p>
+    <ol>
+      <li>Go to <code>Setup</code> -&gt; <code>App Manager</code>.</li>
+      <li>Find app <code>Life Sciences Commercial</code>.</li>
+      <li>Click the dropdown on the row and select <code>Edit</code>.</li>
+      <li>Open <code>Navigation Items</code>.</li>
+      <li>In <code>Available Items</code>, select the object/tab you want (for example <code>Program</code>), then click <code>Add</code>.</li>
+      <li>Reorder the tab if needed.</li>
+      <li>Click <code>Save</code>.</li>
+    </ol>
+    <p>Notes:</p>
+    <ul>
+      <li>If the app is managed and locked for metadata updates, UI edit is the supported path.</li>
+      <li>Users must also have object permission and tab visibility to see and open the tab.</li>
+      <li>For this project setup, set the <code>Program</code> tab to <code>Default On</code> for profile <code>Field Sales Representative</code> (tab API name: <code>standard-Program</code>).</li>
+      <li>For each project object (<code>Program</code>, <code>ProgramEnrollment</code>, <code>BenefitAssignment</code>, <code>BenefitDisbursement</code>, <code>Benefit</code>, <code>BenefitType</code>), make sure a page layout is assigned to profile <code>Field Sales Representative</code> (<code>Setup</code> -&gt; <code>Object Manager</code> -&gt; <code>&lt;Object&gt;</code> -&gt; <code>Page Layouts</code> -&gt; <code>Page Layout Assignment</code>).</li>
+    </ul>
+
+    <h2>Compliance Disclaimer</h2>
+    <p>
+      If any patient information is stored or processed, you are solely responsible for ensuring HIPAA compliance
+      (including access controls, minimum necessary use, encryption, retention, auditability, and applicable BAAs/policies).
+    </p>
+  </main>
+
+  <script type="module">
+    import mermaid from "https://cdn.jsdelivr.net/npm/mermaid@11/dist/mermaid.esm.min.mjs";
+    mermaid.initialize({ startOnLoad: true, theme: "default" });
+  </script>
+</body>
+</html>

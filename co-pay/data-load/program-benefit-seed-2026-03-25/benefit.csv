@@ -1,0 +1,6 @@
+Id,Name,ProgramId,BenefitTypeId,IsActive,StartDateTime
+0jiHs000000us0hIAA,Copay Benefit - Asthma Copay Assistance Program [SEED20260325],11WHs000000dsppMAA,0jhHs000000uo2rIAA,true,2026-03-15T21:20:35.000+0000
+0jiHs000000us0lIAA,Copay Benefit - Cardiology Copay Bridge Program [SEED20260325],11WHs000000dspoMAA,0jhHs000000uo2rIAA,true,2026-03-15T21:20:35.000+0000
+0jiHs000000us0kIAA,Copay Benefit - Dermatology Copay Access Program [SEED20260325],11WHs000000dspsMAA,0jhHs000000uo2rIAA,true,2026-03-15T21:20:35.000+0000
+0jiHs000000us0jIAA,Copay Benefit - Oncology Copay Relief Program [SEED20260325],11WHs000000dsprMAA,0jhHs000000uo2rIAA,true,2026-03-15T21:20:35.000+0000
+0jiHs000000us0iIAA,Copay Benefit - Rheumatology Copay Support Program [SEED20260325],11WHs000000dspqMAA,0jhHs000000uo2rIAA,true,2026-03-15T21:20:35.000+0000
